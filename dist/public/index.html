@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<base href="/" />
+	<meta charset="UTF-8">
+	<title>Publisher App</title>
+	<!-- Library for Importing System Modules  -->
+	<script src="lib/system.src.js"></script>
+	<!-- Library of RxJS Programing -->
+	<script src="lib/Rx.js"></script>
+	<!-- Library for Supporting ES2015 Features -->
+	<!-- If Browser not support ES2015 -->
+	<!-- <script src="lib/es6-shim.js"></script> -->
+	<!-- Angular 2 -->
+	<script src="lib/angular2-polyfills.js"></script>
+	<script src="lib/angular2.dev.js"></script>
+	<script src="lib/http.dev.js"></script>
+	<script src="lib/router.dev.js"></script>
+
+	<!-- JQuery -->
+	<script src="lib/jquery.js"></script>
+	<!-- Materialize -->
+	<link href="lib/materialize.css" rel="stylesheet" />
+	<script src="lib/materialize.js"></script>
+	<!-- Material Design Icon -->
+	<link href="lib/materialdesignicons.css" rel="stylesheet" />
+
+	<!-- Configuration of SystemJS -->
+	<script>
+		System.config({
+			packages: {
+				components: {
+					format: 'register',
+					defaultExtension: 'js'
+				}
+			}
+		});
+		System.import('components/boot.js')
+			.then(null, console.error.bind(console));
+	</script>
+</head>
+<body>
+	<ng2-app>Loading...</ng2-app>
+</body>
+</html>

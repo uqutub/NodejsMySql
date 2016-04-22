@@ -1,0 +1,148 @@
+<nav class="blue darken-4">
+    <div class="nav-wrapper">
+        <div style="padding-left: 10px">
+            <a data-activates="mobile-demo" class="button-collapse"><i class="mdi mdi-menu"></i></a>
+            <a href="/" class="brand-logo">Publisher App</a>
+        </div>
+        <ul class="right hide-on-med-and-down">
+            <li><a (click)="loginModel()" *ngIf="!User.username">Login</a></li>
+            <li><a (click)="registerModel()" *ngIf="false">Register</a></li>
+            <li>{{User.username}}</li>
+            <li><a (click)="logout()" *ngIf="User.username">Logout</a></li>
+        </ul>
+        <ul class="side-nav" id="mobile-demo">
+            <li><a class="blue-text" (click)="loginModel()" *ngIf="!User.username">Login</a></li>
+            <li><a class="blue-text" (click)="registerModel()" *ngIf="false">Register</a></li>
+            <li><a class="blue-text">{{User.username}}</a></li>
+            <li><a class="blue-text" (click)="logout()" *ngIf="User.username">Logout</a></li>
+        </ul>
+    </div>
+</nav>
+<div id="loginModel" class="modal">
+    <div class="nav-wrapper center-align">
+        <h2 class="blue-text darken-3">Login</h2>
+    </div>
+    <div class="row">
+        <div class="col s6 offset-s3">
+            <label for="username">Username</label>
+            <div class="input-field">
+                <input type="text" class="validate" #username placeholder="username" value="ehudson0">
+            </div>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col s6 offset-s3">
+            <label for="password">Password</label>
+            <div class="input-field">
+                <input type="password" class="validate" #password placeholder="password" value="VX5LO6c">
+            </div>
+        </div>
+    </div>
+    <div class="modal-footer">
+        <a class="modal-action modal-close waves-effect waves-green btn-flat blue-text" (click)="login(username, password)">Login</a>
+    </div>
+</div>
+<div id="registerModel" class="modal">
+    <div class="nav-wrapper center-align">
+        <h2 class="blue-text darken-3">Register</h2>
+    </div>
+    <div class="row">
+        <div class="col s6 offset-s3">
+            <label for="username">Username</label>
+            <div class="input-field">
+                <input type="text" class="validate" #regUsername placeholder="username">
+            </div>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col s6 offset-s3">
+            <label for="password">Password</label>
+            <div class="input-field">
+                <input type="password" class="validate" #regPassword placeholder="password">
+            </div>
+        </div>
+    </div>
+    <div class="modal-footer">
+        <a class="modal-action modal-close waves-effect waves-green btn-flat blue-text" (click)="register(regUsername, regPassword)">Register</a>
+    </div>
+</div>
+<div class="row" *ngIf="User.username">
+    <div class="col s4">
+        <ul class="collapsible" data-collapsible="accordion">
+            <li class="collection-header center-align"><h4>Books</h4></li>
+            <div class="divider"></div>
+            <li *ngFor="#book of Books">
+                <div class="collapsible-header">{{book.title}}</div>
+                <div class="collapsible-body row">
+                    <h5 class="center-align">Category: {{book.category}}</h5>
+                    <h6 class="center-align">ISBN13: {{book.isbn13}}</h6>
+                    <h6 class="center-align">ISBN10: {{book.isbn10}}</h6>
+                </div>
+            </li>
+        </ul>
+    </div>
+    <div class="col s4">
+        <div class="card-panel">
+            <h4>Messages</h4>
+        </div>
+        <div class="card-panel" *ngFor="#message of Messages">
+            <!--{{message | json}}-->
+            <h6>Category: {{message.category}}</h6>
+            <div class="divider"></div>
+            <h6>University: {{message.contact.university.name}}</h6>
+            <div class="divider"></div>
+            <p>Content: {{message.content}}</p>
+            <div class="divider"></div>
+            <span>Date: {{message.date}}</span>
+        </div>
+        
+    </div>
+    <div class="col s4">
+        <div class="section">
+            <h1 class="center-align">Todos</h1>
+        </div>
+        <div class="divider"></div>
+        <div class="card-panel hoverable">
+            <div class="input-field">
+                <input type="text" class="validate"  #task>
+                <label for="task">Task</label>
+            </div>
+            <a class="btn waves-effect waves-light" (click)="addTodo(task)">Add Todo</a>
+        </div>
+        <table class="bordered striped highlight responsive-table">
+            <thead>
+                <tr>
+                    <td>
+                        <b>Task</b>
+                    </td>
+                    <td>
+                        <b>Created Date</b>
+                    </td>
+                    <td>
+                        <b>Action</b>
+                    </td>
+                </tr>
+            </thead>
+            <tbody>
+                <tr class="todo" *ngFor="#todo of Todos">
+                    <td>
+                        <input type="checkbox"  id="{{todo.id}}" [(ngModel)]="todo.status" />
+                        <label [attr.for]="todo.id">{{todo.description}}</label>
+                    </td>
+                    <td>
+                        {{todo.date}}
+                        <!--{{todo.date | date: 'medium'}}-->
+                    </td>
+                    <td>
+                        <a class="btn-floating waves-effect waves-light center-align" (click)="deleteTodo()">x</a>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+        <div class="divider"></div>
+    </div>
+</div>
+
+<!--{{Books}}
+{{Messages}}
+{{Todos}}-->
